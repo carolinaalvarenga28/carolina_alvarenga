@@ -1,0 +1,1011 @@
+<!DOCTYPE html><html class="scroll-smooth" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Carolina Alvarenga — Digital Designer &amp; Creative Thinker</title>
+<!-- Tailwind CSS CDN -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Google Fonts: Bebas Neue for monumental editorial headers, Plus Jakarta Sans for clean body -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&amp;family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&amp;display=swap" rel="stylesheet">
+<!-- Lucide Icons -->
+<script src="https://unpkg.com/lucide@latest"></script>
+<!-- Tailwind Configuration -->
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            surface: {
+              50: '#FFFFFF',
+              100: '#F8FAFD',
+              200: '#EEF4FE',
+              300: '#E1EBF7',
+            },
+            primaryIce: '#ABCFF1', // User-specified brand primary
+            deepSlate: '#0D141C',
+            obsidian: '#12171E',
+            cobalt: '#0054A6',
+            electricCyan: '#6CB7F5',
+            steelBlue: '#3E627F',
+            accentSky: '#ABCFF1',
+          },
+          fontFamily: {
+            display: ['"Bebas Neue"', 'Impact', 'sans-serif'],
+            body: ['"Plus Jakarta Sans"', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+<!-- Custom Styles for Editorial Layout Aesthetics -->
+<style data-purpose="typography">
+    .font-condensed {
+      font-family: 'Bebas Neue', sans-serif;
+      letter-spacing: 0.03em;
+    }
+    .text-stroke-cream {
+      -webkit-text-stroke: 1.5px #EEF4FE;
+      color: transparent;
+    }
+    .text-stroke-dark {
+      -webkit-text-stroke: 1.5px #0D141C;
+      color: transparent;
+    }
+  </style>
+<style data-purpose="layout">
+    /* Architectural crisp micro-grid texture */
+    .bg-grain {
+      background-color: #F8FAFD;
+      background-image: radial-gradient(rgba(13, 20, 28, 0.04) 1px, transparent 0);
+      background-size: 24px 24px;
+    }
+    .custom-border {
+      border-color: rgba(13, 20, 28, 0.12);
+    }
+    .custom-border-dark {
+      border-color: rgba(255, 255, 255, 0.12);
+    }
+    .vertical-text {
+      writing-mode: vertical-rl;
+      text-orientation: mixed;
+    }
+    :root {
+  --pm-ink: #0b1118;
+  --pm-slate: #0d1620;
+  --pm-ice: #abcff1;
+  --pm-steel: #3e627f;
+  --pm-cobalt: #2a75d3;
+  --pm-canvas: #f8f9ff;
+  --pm-tint: #e8f1f9;
+  --pm-line: #cbdbe8;
+  --pm-text: #3b4249;
+
+  --pm-font-display: "Anton", Impact, sans-serif;
+  --pm-font-body: "Inter", system-ui, sans-serif;
+  --pm-font-mono: "JetBrains Mono", ui-monospace, monospace;
+}
+
+/* ----- Shared bits ----- */
+.pm-sq { display: inline-block; width: 10px; height: 10px; background: var(--pm-ice); flex: none; }
+.pm-chip-dark {
+  display: inline-block; padding: 5px 9px;
+  background: var(--pm-ink); color: #fff;
+  font: 700 10px var(--pm-font-mono); letter-spacing: .12em; text-transform: uppercase;
+}
+.pm-chip-light {
+  display: inline-block; padding: 4px 8px;
+  background: var(--pm-tint); border: 1px solid var(--pm-line); color: var(--pm-steel);
+  font: 700 10px var(--pm-font-mono); letter-spacing: .12em; text-transform: uppercase;
+}
+
+/* ----- Buttons ----- */
+.pm-btn {
+  display: inline-flex; align-items: center; gap: 12px;
+  padding: 13px 26px;
+  background: var(--pm-ink); color: #fff;
+  border: 1px solid var(--pm-ink); border-radius: 0;
+  font-family: var(--pm-font-display); font-size: 17px; letter-spacing: .06em; text-transform: uppercase; text-decoration: none;
+  cursor: pointer; transition: background .2s, color .2s, border-color .2s;
+}
+.pm-btn:hover { background: var(--pm-ice); color: var(--pm-ink); border-color: var(--pm-ice); }
+.pm-btn:focus-visible { outline: 2px solid var(--pm-ice); outline-offset: 3px; }
+.pm-btn svg { width: 18px; height: 18px; transition: transform .2s; }
+.pm-btn:hover svg { transform: translate(2px, -2px); }
+
+.pm-btn--light { background: var(--pm-canvas); color: var(--pm-ink); border-color: var(--pm-canvas); padding: 14px 30px; font-size: 20px; }
+.pm-btn--light:hover { background: var(--pm-ice); border-color: var(--pm-ice); }
+
+/* ----- Overlay + dialog ----- */
+.pm-overlay {
+  position: fixed; inset: 0; z-index: 1000;
+  display: none; align-items: flex-start; justify-content: center;
+  padding: 20px 16px; overflow-y: auto;
+  background: rgba(11, 17, 24, .74);
+}
+.pm-overlay.is-open { display: flex; animation: pm-fade .2s ease-out; }
+@keyframes pm-fade { from { opacity: 0; } to { opacity: 1; } }
+@keyframes pm-rise { from { transform: translateY(16px); opacity: 0; } to { transform: none; opacity: 1; } }
+
+.pm-dialog {
+  width: 100%; max-width: 1040px; margin: auto;
+  background: var(--pm-canvas);
+  border: 1px solid var(--pm-line); border-radius: 0;
+  box-shadow: 0 28px 70px rgba(0, 0, 0, .45);
+  animation: pm-rise .25s ease-out;
+}
+
+/* Top bar */
+.pm-top {
+  display: flex; justify-content: flex-end; align-items: center;
+  padding: 14px 24px;
+  background: var(--pm-canvas); border-bottom: 1px solid var(--pm-line);
+}
+.pm-close { padding: 9px 18px; font-size: 15px; gap: 10px; }
+
+/* Gallery */
+.pm-frame { position: relative; height: clamp(180px, 26vw, 250px);  background: var(--pm-tint); overflow: hidden; }
+.pm-frame img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; display: block; }
+.pm-fallback {
+  position: absolute; inset: 0; display: grid; place-items: center; text-align: center; padding: 16px;
+  font: 700 11px var(--pm-font-mono); letter-spacing: .14em; text-transform: uppercase; color: var(--pm-steel);
+  background: repeating-linear-gradient(135deg, var(--pm-tint), var(--pm-tint) 10px, #dcebf7 10px, #dcebf7 11px);
+}
+.pm-band {
+  display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap;
+  padding: 12px 24px; background: var(--pm-tint); border-bottom: 1px solid var(--pm-line);
+}
+.pm-thumbs { display: flex; gap: 8px; }
+.pm-thumb {
+  position: relative; width: 64px; height: 44px; padding: 0; overflow: hidden;
+  background: #fff; border: 1px solid var(--pm-line); border-radius: 0; cursor: pointer;
+  opacity: .6; transition: opacity .15s, border-color .15s;
+}
+.pm-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.pm-thumb:hover { opacity: 1; }
+.pm-thumb[aria-current="true"] { opacity: 1; border-color: var(--pm-ink); box-shadow: 0 0 0 1px var(--pm-ink); }
+.pm-thumb:focus-visible { outline: 2px solid var(--pm-ink); outline-offset: 2px; }
+.pm-caption { display: flex; gap: 14px; font: 500 10px var(--pm-font-mono); letter-spacing: .12em; text-transform: uppercase; color: var(--pm-steel); }
+
+/* Header */
+.pm-head { padding: 36px 32px 32px; border-bottom: 1px solid var(--pm-line); }
+.pm-meta-row { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 18px; }
+.pm-meta { font: 400 11px var(--pm-font-mono); letter-spacing: .04em; color: #6b7480; }
+.pm-title {
+  margin: 0 0 18px;
+  font-family: var(--pm-font-display); font-weight: 400; text-transform: uppercase;
+  font-size: clamp(40px, 7vw, 76px); line-height: .98; letter-spacing: -.015em; color: var(--pm-ink);
+}
+.pm-stack { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; padding: 0; list-style: none; }
+
+/* Sections */
+.pm-section {
+  display: grid; grid-template-columns: 1fr; gap: 14px;
+  padding: 30px 32px; border-bottom: 1px solid var(--pm-line);
+}
+@media (min-width: 768px) { .pm-section { grid-template-columns: 230px 1fr; gap: 32px; } }
+.pm-label { display: flex; align-items: center; gap: 10px; margin: 0; font: 500 11px var(--pm-font-mono); letter-spacing: .14em; text-transform: uppercase; color: var(--pm-steel); }
+.pm-label b { color: var(--pm-ink); font-weight: 700; }
+.pm-text { margin: 0; max-width: 62ch; font-family: var(--pm-font-body); font-size: 16px; line-height: 27px; color: var(--pm-text); }
+
+/* Process rows */
+.pm-steps { margin: 0; padding: 0; list-style: none; max-width: 640px; }
+.pm-steps li {
+  display: grid; grid-template-columns: 22px 1fr auto; align-items: center; gap: 10px;
+  padding: 14px 0; border-bottom: 1px solid var(--pm-line);
+  font: 500 14px/20px var(--pm-font-body); letter-spacing: .04em; text-transform: uppercase; color: var(--pm-ink);
+}
+.pm-steps li:first-child { padding-top: 0; }
+.pm-steps li:last-child { border-bottom: 0; padding-bottom: 0; }
+.pm-steps li::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--pm-ice); }
+.pm-steps li:nth-child(3n+2)::before { background: var(--pm-steel); }
+.pm-steps li:nth-child(3n+3)::before { background: var(--pm-cobalt); }
+.pm-steps small { font: 400 10px var(--pm-font-mono); letter-spacing: .12em; color: #8b95a1; text-align: right; }
+
+/* Metrics */
+.pm-metrics { display: flex; flex-wrap: wrap; gap: 36px; margin-top: 26px; padding-top: 22px; border-top: 1px solid var(--pm-line); }
+.pm-metric strong { display: inline-block; font: 400 52px/1 var(--pm-font-display); color: var(--pm-ink); }
+.pm-metric i { display: inline-block; width: 7px; height: 7px; margin-left: 4px; border-radius: 50%; background: var(--pm-ice); }
+.pm-metric:nth-child(2) i { background: var(--pm-steel); }
+.pm-metric:nth-child(3) i { background: var(--pm-cobalt); }
+.pm-metric small { display: block; margin-top: 8px; font: 500 10px var(--pm-font-mono); letter-spacing: .14em; text-transform: uppercase; color: #6b7480; }
+
+/* Footer */
+.pm-foot {
+  display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 16px;
+  padding: 22px 32px; background: var(--pm-slate); color: var(--pm-canvas);
+}
+.pm-foot-hint { font: 400 11px var(--pm-font-mono); letter-spacing: .1em; text-transform: uppercase; color: rgba(248,249,255,.4); }
+
+body.pm-locked { overflow: hidden; }
+@media (max-width: 600px) {
+  .pm-top { padding: 12px 16px; }
+  .pm-band { padding: 10px 16px; }
+  .pm-head { padding: 26px 20px 24px; }
+  .pm-section { padding: 24px 20px; }
+  .pm-foot { padding: 18px 20px; }
+  .pm-foot-hint { display: none; }
+  .pm-btn--light { width: 100%; justify-content: center; }
+  .pm-metric strong { font-size: 44px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pm-overlay.is-open, .pm-dialog { animation: none; }
+}
+  </style>
+
+
+</head>
+<body class="bg-grain text-obsidian font-body antialiased selection:bg-primaryIce selection:text-obsidian overflow-x-hidden">
+<!-- BEGIN: MainHeader -->
+<header class="sticky top-0 z-50 bg-[#F8FAFD]/90 backdrop-blur-md border-b custom-border transition-all">
+<div class="max-w-[1400px] mx-auto px-6 lg:px-12 h-20 flex items-center justify-between">
+<!-- Brand Logo -->
+<a class="font-condensed text-3xl md:text-4xl font-bold tracking-tight text-obsidian flex items-center gap-2 group" href="#">
+<span class="tracking-wide">CAROLINA ALVARENGA</span>
+<span class="inline-block w-2.5 h-2.5 rounded-full bg-primaryIce group-hover:scale-125 transition-transform"></span>
+</a>
+<!-- Primary Action Button -->
+<div class="flex items-center gap-3">
+<a class="inline-flex items-center justify-center gap-2 px-6 py-2.5 bg-obsidian text-surface-50 font-condensed tracking-wider text-lg uppercase transition-all duration-200 hover:bg-primaryIce hover:text-obsidian hover:shadow-lg active:scale-95 border border-obsidian" href="#contact">
+<span class="">Contact me</span>
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="arrow-up-right" aria-hidden="true" class="lucide lucide-arrow-up-right w-4 h-4 text-primaryIce group-hover:text-obsidian"><path d="M7 7h10v10"></path><path d="M7 17 17 7"></path></svg>
+</a>
+</div>
+</div>
+</header>
+<!-- END: MainHeader -->
+<main>
+<!-- BEGIN: HeroSection -->
+<section class="relative border-b custom-border overflow-hidden" id="home">
+<div class="max-w-[1400px] mx-auto px-6 lg:px-12 pt-8 pb-16 lg:py-20">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+<!-- Hero Left Column: Editorial Headline & Actions -->
+<div class="lg:col-span-7 flex flex-col justify-center z-10">
+<!-- Massive Impact Typography -->
+<h1 class="font-condensed text-[4.2rem] sm:text-[5.8rem] md:text-[6.8rem] lg:text-[7.6rem] leading-[0.88] tracking-tight uppercase text-obsidian font-bold">
+              CREATING<br>
+              IDEAS<br>
+<span class="text-steelBlue hover:text-cobalt transition-colors">&amp; BUILDING</span><br>
+              POSSIBILITIES
+            </h1>
+<!-- Descriptive Mission Statement -->
+
+<!-- Dual Action CTAs -->
+<div class="mt-10 flex flex-wrap items-center gap-5">
+<a class="inline-flex items-center gap-3 px-8 py-3.5 bg-obsidian text-surface-50 font-condensed tracking-wider text-xl uppercase hover:bg-primaryIce hover:text-obsidian transition-colors shadow-md group" href="#projects">
+<span class="">VIEW MY WORK</span>
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="arrow-up-right" aria-hidden="true" class="lucide lucide-arrow-up-right w-5 h-5 text-primaryIce group-hover:text-obsidian group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"><path d="M7 7h10v10"></path><path d="M7 17 17 7"></path></svg>
+</a>
+<a class="inline-flex items-center gap-2 px-6 py-3.5 font-condensed text-xl uppercase tracking-wider text-obsidian hover:text-cobalt border-b-2 border-obsidian hover:border-cobalt transition-all" href="#about">
+<span class="">ABOUT ME</span>
+<span class="w-2 h-2 rounded-full bg-primaryIce"></span>
+</a>
+</div>
+</div>
+<!-- Hero Right Column: Graphic Composition & Portrait Image -->
+<div class="lg:col-span-5 relative flex justify-center lg:justify-end">
+<!-- Outer Geometric Art Board -->
+<div class="relative w-full max-w-[460px] aspect-[4/5] bg-deepSlate shadow-2xl overflow-hidden border border-obsidian">
+<!-- Split Color Accent Blocks behind photo (Recolored from terracotta/ochre to Ice Blue & Deep Slate Cobalt) -->
+<div class="absolute top-0 right-0 w-2/3 h-1/2 bg-primaryIce/70"></div>
+<div class="absolute bottom-0 right-0 w-1/2 h-1/3 bg-steelBlue"></div>
+<div class="absolute top-8 left-8 w-12 h-12 bg-primaryIce/40 backdrop-blur-sm z-20 border border-primaryIce/60"></div>
+<!-- Portrait Subject Image -->
+<img alt="Carolina Alvarenga - Digital Designer" class="absolute inset-0 w-full h-full object-cover object-top transition-all duration-700 contrast-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB7LGQzYxVfCeiMF20OtPBRQWoC8P1E2wQ-BEmVXIVCniwYtKUirNO8U-8rlgLQE46i_b9PBV9c2znOJblF9GUV-SMVhu_EBkhf4QDM8_LRvKY-pHEvuxmtK_lcJo83kRoENCz2Rz4sxqhkIXTNhH18TUBehqG0AFE66UvuxJ5hEOqqnr5qD4ysZhcP1XKAJXlGBDZRMixPrMtB2ayx4moqy_2QujtHsG6HL6KK1YsY1FWn1uAXVoQO">
+<!-- Architectural Graphic Overlays -->
+<div class="absolute inset-0 bg-gradient-to-t from-deepSlate/95 via-transparent to-transparent pointer-events-none"></div>
+<!-- Reticle / Crosshair Graphic Mark -->
+<div class="absolute top-1/3 left-10 text-surface-200/50 pointer-events-none">
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="plus" aria-hidden="true" class="lucide lucide-plus w-8 h-8 stroke-1"><path d="M5 12h14"></path><path d="M12 5v14"></path></svg>
+</div>
+<!-- Monogram Tag -->
+<div class="absolute bottom-6 left-6 z-20">
+<span class="font-condensed text-4xl font-black text-surface-50 tracking-wider">C·A</span>
+
+</div>
+</div>
+<!-- Rotated Vertical Micro-Label on Desktop side -->
+<div class="hidden xl:flex absolute -right-12 top-1/2 -translate-y-1/2 items-center gap-3">
+<span class="vertical-text text-[11px] uppercase tracking-[0.25em] font-bold text-obsidian/60">COMMUNICATE WITH PURPOSE</span>
+<div class="w-px h-16 bg-obsidian/30"></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- END: HeroSection -->
+<!-- BEGIN: AboutSection -->
+<section class="border-b custom-border bg-surface-100" id="about">
+<div class="max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-12">
+<!-- Left: Editorial Bio Statement -->
+<div class="lg:col-span-6 p-8 sm:p-12 lg:p-16 border-b lg:border-b-0 lg:border-r custom-border flex flex-col justify-between">
+<div>
+<div class="inline-flex items-center gap-2 mb-4">
+<span class="w-3 h-3 bg-primaryIce border border-steelBlue/30"></span>
+<span class="text-xs uppercase tracking-widest font-bold text-steelBlue">ABOUT ME</span>
+</div>
+<h2 class="font-condensed text-4xl sm:text-5xl lg:text-6xl uppercase tracking-tight text-obsidian leading-[0.95]">
+              I believe every great idea starts with curiosity.
+            </h2>
+<p class="mt-6 text-obsidian/80 text-base md:text-lg leading-relaxed font-normal">
+              High school student with strong skills in leadership, assertive communication, and organization, recognized for her authenticity, charisma, and eloquence. Certified in TOEIC Listening & Reading, MOS Excel, and Excel Expert. Passionate about communication and continuous learning, seeking scholarship opportunities to grow academically and professionally.
+            </p>
+</div>
+</div>
+<!-- Middle: Metric Counters Grid -->
+<div class="lg:col-span-6 p-8 sm:p-12 flex flex-col justify-center divide-y custom-border border-b lg:border-b-0 lg:border-r bg-surface-50">
+<!-- Metric 1 -->
+<div class="py-6 first:pt-0">
+<div class="flex items-baseline gap-2">
+<span class="font-condensed text-6xl lg:text-8xl font-bold text-obsidian leading-none text-steelBlue hover:text-cobalt transition-colors">Certifications </span>
+<span class="w-2.5 h-2.5 rounded-full bg-primaryIce mb-2"></span>
+</div>
+<p class="text-xs uppercase tracking-widest font-bold text-obsidian/60 mt-1"></p>
+</div>
+<!-- Metric 2 -->
+<div class="py-6">
+<div class="flex items-baseline gap-2">
+<span class="font-condensed text-6xl lg:text-7xl font-bold text-obsidian leading-none">TOEIC</span>
+<span class="w-2.5 h-2.5 rounded-full bg-steelBlue mb-2"></span>
+</div>
+<p class="text-xs uppercase tracking-widest font-bold text-obsidian/60 mt-1">Listening & Reading | Speaking & Writing</p>
+</div>
+<!-- Metric 3 -->
+<div class="py-6 last:pb-0">
+<div class="flex items-baseline gap-2">
+<span class="font-condensed text-6xl lg:text-7xl font-bold text-obsidian leading-none">Excel</span>
+<span class="w-2.5 h-2.5 rounded-full bg-primaryIce mb-2"></span>
+</div>
+<p class="text-xs uppercase tracking-widest font-bold text-obsidian/60 mt-1">Mos Excel | Excel Expert</p>
+</div>
+</div>
+<!-- Right: Textured Graphic Monogram Block (Recolored with #abcff1) -->
+
+</div>
+</section>
+<!-- END: AboutSection -->
+<!-- BEGIN: SkillsSection -->
+<section class="border-b custom-border bg-grain" id="skills">
+<div class="max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-12 divide-y lg:divide-y-0 lg:divide-x custom-border">
+<!-- Left: Technical Competencies & Progress Bars -->
+<div class="lg:col-span-8 p-8 sm:p-12 lg:p-14">
+<h2 class="font-condensed text-4xl sm:text-5xl uppercase tracking-tight text-obsidian mb-8">
+            SKILLS
+          </h2>
+<div class="space-y-6"><div class="divide-y custom-border border-t border-b">
+<div class="py-4 flex items-center justify-between group">
+<div class="flex items-center gap-3">
+<span class="w-2 h-2 rounded-full bg-cobalt group-hover:scale-125 transition-transform"></span>
+<span class="text-base sm:text-lg font-semibold uppercase tracking-wider text-obsidian">Leadership</span>
+</div>
+<span class="font-mono text-xs text-obsidian/50 uppercase tracking-widest"></span>
+</div>
+<div class="py-4 flex items-center justify-between group">
+<div class="flex items-center gap-3">
+<span class="w-2 h-2 rounded-full bg-cobalt group-hover:scale-125 transition-transform"></span>
+<span class="text-base sm:text-lg font-semibold uppercase tracking-wider text-obsidian">Critical thinking</span>
+</div>
+<span class="font-mono text-xs text-obsidian/50 uppercase tracking-widest"></span>
+</div>
+<div class="py-4 flex items-center justify-between group">
+<div class="flex items-center gap-3">
+<span class="w-2 h-2 rounded-full bg-cobalt group-hover:scale-125 transition-transform"></span>
+<span class="text-base sm:text-lg font-semibold uppercase tracking-wider text-obsidian">Public Speaking</span>
+</div>
+<span class="font-mono text-xs text-obsidian/50 uppercase tracking-widest"></span>
+</div>
+<div class="py-4 flex items-center justify-between group">
+<div class="flex items-center gap-3">
+<span class="w-2 h-2 rounded-full bg-cobalt group-hover:scale-125 transition-transform"></span>
+<span class="text-base sm:text-lg font-semibold uppercase tracking-wider text-obsidian">Assertive communication</span>
+</div>
+<span class="font-mono text-xs text-obsidian/50 uppercase tracking-widest"></span>
+</div>
+<div class="py-4 flex items-center justify-between group">
+<div class="flex items-center gap-3">
+<span class="w-2 h-2 rounded-full bg-cobalt group-hover:scale-125 transition-transform"></span>
+<span class="text-base sm:text-lg font-semibold uppercase tracking-wider text-obsidian">proactivity</span>
+</div>
+<span class="font-mono text-xs text-obsidian/50 uppercase tracking-widest"></span>
+</div>
+</div></div>
+</div>
+<!-- Middle: Three-Step Philosophy -->
+
+<!-- Right: Design Manifesto & Working Together -->
+<div class="lg:col-span-4 p-8 sm:p-12 lg:p-14 flex flex-col justify-between bg-surface-50">
+<div>
+<div class="w-8 h-1 bg-primaryIce mb-6"></div>
+<p class="text-lg md:text-xl font-medium text-obsidian leading-relaxed italic">
+              “Communication is a symbolic process whereby reality is produced, maintained, repaired, and transformed.”
+            </p>
+<p class="mt-4 text-xs uppercase tracking-widest text-obsidian/50 font-bold">
+              — James W. Carey
+            </p>
+</div>
+<div class="mt-10">
+<a class="inline-flex items-center gap-3 px-6 py-3 bg-obsidian text-surface-50 font-condensed tracking-wider text-lg uppercase hover:bg-primaryIce hover:text-obsidian transition-colors group" href="Carolina Gisell Elías Alvarenga CV.pdf" download="Carolina Gisell Elías Alvarenga CV.pdf">
+<span class="">mY rESUMÉ</span>
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="arrow-up-right" aria-hidden="true" class="lucide lucide-arrow-up-right w-4 h-4 text-primaryIce group-hover:text-obsidian group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"><path d="M7 7h10v10"></path><path d="M7 17 17 7"></path></svg>
+</a>
+</div>
+</div>
+</div>
+</section>
+<!-- END: SkillsSection -->
+<!-- BEGIN: ProjectsSection -->
+<section class="py-16 md:py-24 border-b custom-border" id="projects">
+<div class="max-w-[1400px] mx-auto px-6 lg:px-12">
+<!-- Section Header -->
+<div class="flex flex-col sm:flex-row sm:items-end justify-between mb-12 pb-6 border-b custom-border">
+<div>
+<h2 class="font-condensed text-5xl sm:text-6xl md:text-7xl uppercase tracking-tight text-obsidian leading-none mt-1">
+              PROJECTS
+            </h2>
+</div>
+<a class="mt-4 sm:mt-0 inline-flex items-center gap-2 text-xs uppercase tracking-widest font-bold text-obsidian hover:text-cobalt transition-colors" href="#contact">
+</a>
+</div>
+<!-- 3-Column Projects Showcase -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-10">
+  <!-- Project Card 01 -->
+  <a href="#" data-project="project-1" class="group block border border-obsidian/20 hover:transition-all bg-surface-50 overflow-hidden shadow-sm hover:shadow-lg">
+    <div class="relative w-full aspect-video overflow-hidden bg-surface-200 border-b border-obsidian/10">
+      <img src="Devboost_Rocket_Logo.png" alt="Aura Apothecary Brand Identity" class="w-full h-64 md:h-72 object-cover group-hover:scale-[1.02] transition-transform duration-500">
+      <div class="absolute top-4 right-4">
+        <span class="inline-block w-2.5 h-2.5 rounded-full bg-primaryIce"></span>
+      </div>
+    </div>
+    <div class="p-6 md:p-8 flex flex-col justify-between">
+      <div>
+        <div class="flex items-center justify-between mb-3">
+          <span class="font-mono text-xs uppercase tracking-widest bg-obsidian text-surface-50 px-2 py-0.5 font-semibold">01 / Website</span>
+          <span class="font-mono text-xs text-obsidian/60">2024 · Projects Repository</span>
+        </div>
+        <h3 class="font-condensed text-3xl md:text-4xl font-bold uppercase tracking-tight text-obsidian group-hover:text-cobalt transition-colors">
+          DEVBOOST
+        </h3>
+      </div>
+      <div class="mt-6 pt-4 border-t custom-border flex items-center justify-between">
+        <span class="text-xs font-mono uppercase tracking-widest font-bold text-obsidian group-hover:text-cobalt transition-colors">VIEW PROJECT</span>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="arrow-up-right" aria-hidden="true" class="lucide lucide-arrow-up-right w-4 h-4 text-obsidian group-hover:text-cobalt group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"><path d="M7 7h10v10"></path><path d="M7 17 17 7"></path></svg>
+      </div>
+    </div>
+  </a>
+
+  <!-- Project Card 02 -->
+  <a href="#" data-project="project-2" class="group block border border-obsidian/20 hover:transition-all bg-surface-50 overflow-hidden shadow-sm hover:shadow-lg">
+    <div class="relative w-full aspect-video overflow-hidden bg-surface-200 border-b border-obsidian/10">
+      <img src="id.png" alt="" class="w-full h-64 md:h-72 object-cover group-hover:scale-[1.02] transition-transform duration-500">
+      <div class="absolute top-4 right-4">
+        <span class="inline-block w-2.5 h-2.5 rounded-full bg-primaryIce"></span>
+      </div>
+    </div>
+    <div class="p-6 md:p-8 flex flex-col justify-between">
+      <div>
+        <div class="flex items-center justify-between mb-3">
+          <span class="font-mono text-xs uppercase tracking-widest bg-obsidian text-surface-50 px-2 py-0.5 font-semibold">02 / Website </span>
+          <span class="font-mono text-xs text-obsidian/60">2026 · Facial Recognition</span>
+        </div>
+        <h3 class="font-condensed text-3xl md:text-4xl font-bold uppercase tracking-tight text-obsidian group-hover:text-cobalt transition-colors">
+          IDentify
+        </h3>
+      </div>
+      <div class="mt-6 pt-4 border-t custom-border flex items-center justify-between">
+        <span class="text-xs font-mono uppercase tracking-widest font-bold text-obsidian group-hover:text-cobalt transition-colors">VIEW PROJECT</span>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="arrow-up-right" aria-hidden="true" class="lucide lucide-arrow-up-right w-4 h-4 text-obsidian group-hover:text-cobalt group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"><path d="M7 7h10v10"></path><path d="M7 17 17 7"></path></svg>
+      </div>
+    </div>
+  </a>
+</div>
+</div>
+</section>
+<!-- END: ProjectsSection -->
+
+<!-- BEGIN: ContactSection (Recolored with #abcff1 panel) -->
+<section class="grid grid-cols-1 lg:grid-cols-12 border-b custom-border" id="contact">
+<!-- Contact Left: Giant Primary Ice (#abcff1) Callout with Punchy Dark Typography -->
+<div class="lg:col-span-4 bg-primaryIce text-obsidian p-10 sm:p-14 lg:p-16 flex flex-col justify-between border-b lg:border-b-0 lg:border-r custom-border">
+<div>
+<span class="text-xs uppercase tracking-widest font-bold text-steelBlue block mb-3">GET IN TOUCH</span>
+<h2 class="font-condensed text-5xl sm:text-6xl md:text-7xl uppercase tracking-tight leading-[0.88] text-obsidian font-black">
+            LET'S CREATE<br>
+            SOMETHING<br>
+            REMARKABLE
+          </h2>
+</div>
+<div class="mt-12 flex items-center gap-2">
+<span class="w-3 h-3 bg-obsidian"></span>
+</div>
+</div>
+<!-- Contact Center: Direct Information Details -->
+<div class="lg:col-span-3 bg-surface-100 p-8 sm:p-14 flex flex-col justify-center space-y-8 border-b lg:border-b-0 lg:border-r custom-border">
+<!-- Item 1: Email -->
+<div class="flex items-start gap-3">
+<div class="w-10 h-10 bg-obsidian text-surface-50 flex items-center justify-center flex-shrink-0">
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="mail" aria-hidden="true" class="lucide lucide-mail w-4 h-4 text-primaryIce"><path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7"></path><rect x="2" y="4" width="20" height="16" rx="2"></rect></svg>
+</div>
+<div>
+<span class="text-[10px] font-mono uppercase tracking-widest text-obsidian/50 block font-bold">DIRECT INQUIRIES</span>
+<a class="text-sm sm:text-base font-semibold text-obsidian hover:text-cobalt transition-colors break-all" href="#contact">
+              cgisellelias@gmail.com
+            </a>
+</div>
+</div>
+<!-- Item 2: Location -->
+<div class="flex items-start gap-4">
+<div class="w-10 h-10 bg-obsidian text-surface-50 flex items-center justify-center flex-shrink-0">
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="linkedin" aria-hidden="true" class="lucide lucide-linkedin w-4 h-4 text-primaryIce"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect width="4" height="12" x="2" y="9"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+</div>
+<div>
+<span class="text-[10px] font-mono uppercase tracking-widest text-obsidian/50 block font-bold">STUDIO BASE</span>
+<a class="text-sm sm:text-base font-semibold text-obsidian hover:text-cobalt transition-colors break-all" target="_blank" rel="noopener noreferrer" href="https://linkedin.com/in/carolinaalvarenga28">
+              LinkedIn: <span class="text-cobalt">Carolina <br>Alvarenga</span>
+            </a>
+</div>
+</div>
+<!-- Item 3: Availability Badge -->
+<div class="flex items-start gap-4">
+<div class="w-10 h-10 bg-obsidian text-surface-50 flex items-center justify-center flex-shrink-0">
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="github" aria-hidden="true" class="lucide lucide-github w-4 h-4 text-primaryIce"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"></path><path d="M9 18c-4.51 2-5-2-7-2"></path></svg>
+</div>
+<div>
+<span class="text-[10px] font-mono uppercase tracking-widest text-obsidian/50 block font-bold">STATUS</span>
+<a class="text-sm sm:text-base font-semibold text-obsidian hover:text-cobalt transition-colors break-all" target="_blank" rel="noopener noreferrer" href="https://github.com/carolinaalvarenga">
+              GitHub
+            </a>
+</div>
+</div>
+</div>
+<!-- Contact Right: Minimalist Form -->
+<div class="lg:col-span-5 bg-deepSlate text-surface-50 p-10 sm:p-14 flex flex-col justify-center">
+  <form id="contact-form" class="space-y-6">
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+      <!-- Name Input -->
+      <div class="space-y-1">
+        <label class="block text-[11px] font-mono uppercase tracking-widest text-surface-200/60 font-semibold" for="contact-name">NAME *</label>
+        <input class="w-full bg-transparent border-0 border-b border-surface-200/30 px-0 py-2.5 text-sm text-surface-50 placeholder-surface-200/30 focus:border-primaryIce focus:ring-0 transition-colors" id="contact-name" placeholder="Jane Doe" required type="text">
+      </div>
+      <!-- Email Input -->
+      <div class="space-y-1">
+        <label class="block text-[11px] font-mono uppercase tracking-widest text-surface-200/60 font-semibold" for="contact-email">EMAIL *</label>
+        <input class="w-full bg-transparent border-0 border-b border-surface-200/30 px-0 py-2.5 text-sm text-surface-50 placeholder-surface-200/30 focus:border-primaryIce focus:ring-0 transition-colors" id="contact-email" placeholder="jane@company.com" required type="email">
+      </div>
+    </div>
+
+    <!-- Message Textarea -->
+    <div class="space-y-1 pt-2">
+      <label class="block text-[11px] font-mono uppercase tracking-widest text-surface-200/60 font-semibold" for="contact-message">MESSAGE *</label>
+      <textarea class="w-full bg-transparent border-0 border-b border-surface-200/30 px-0 py-2.5 text-sm text-surface-50 placeholder-surface-200/30 focus:border-primaryIce focus:ring-0 transition-colors resize-none" id="contact-message" placeholder="Tell me about your project, timeline, and vision..." required rows="3"></textarea>
+    </div>
+
+    <!-- Honeypot anti-spam: no tocar ni mostrar -->
+    <div class="absolute -left-[9999px] w-px h-px overflow-hidden" aria-hidden="true">
+      <label for="contact-website">Website</label>
+      <input id="contact-website" name="website" type="text" tabindex="-1" autocomplete="off">
+    </div>
+    <!-- Estado del envío -->
+    <p id="contact-status" class="text-sm font-mono min-h-[1.25rem]" role="status" aria-live="polite"></p>
+
+    <!-- Submit Action Button -->
+    <div class="pt-4 flex justify-between items-center">
+      <span class="text-[11px] font-mono text-surface-200/40">TYPICAL RESPONSE &lt; 24H</span>
+      <button id="contact-submit" class="inline-flex items-center gap-3 px-8 py-3.5 bg-surface-50 text-obsidian font-condensed tracking-wider text-xl uppercase hover:bg-primaryIce hover:text-obsidian transition-all group disabled:opacity-50 disabled:cursor-not-allowed" type="submit">
+        <span id="contact-submit-label">SEND MESSAGE</span>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="lucide lucide-arrow-up-right w-5 h-5 text-cobalt group-hover:text-obsidian group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all"><path d="M7 7h10v10"></path><path d="M7 17 17 7"></path></svg>
+      </button>
+    </div>
+  </form>
+</div>
+</section>
+<!-- END: ContactSection -->
+</main>
+<!-- BEGIN: MainFooter -->
+<footer class="bg-surface-100 border-t custom-border py-8 text-xs font-semibold uppercase tracking-wider text-obsidian/70">
+<div class="max-w-[1400px] mx-auto px-6 lg:px-12 flex flex-col md:flex-row items-center justify-between gap-6">
+<!-- Brand & Copyright -->
+<div class="flex items-center gap-4">
+<a class="font-condensed text-2xl font-bold text-obsidian tracking-tight" href="#">CAROLINA ALVARENGA</a>
+<span class="text-obsidian/30">•</span>
+<p class="text-[11px] font-mono lowercase text-obsidian/60">
+          © 2026 all rights reserved.
+        </p>
+</div>
+<!-- Social Channels -->
+<div class="flex items-center gap-6 text-[11px]">
+<a class="hover:text-cobalt transition-colors" href="https://linkedin.com/in/carolinaalvarenga28" rel="noopener noreferrer" target="_blank">LINKEDIN</a>
+<a class="hover:text-cobalt transition-colors" href="https://github.com/carolinaalvarenga28" rel="noopener noreferrer" target="_blank">GITHUB</a>
+</div>
+<!-- Return to Top Button -->
+<div>
+<a aria-label="Back to Top" class="w-10 h-10 border border-obsidian/30 flex items-center justify-center hover:bg-obsidian hover:text-surface-50 transition-colors" href="#home">
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="arrow-up" aria-hidden="true" class="lucide lucide-arrow-up w-4 h-4"><path d="m5 12 7-7 7 7"></path><path d="M12 19V5"></path></svg>
+</a>
+</div>
+</div>
+</footer>
+
+<!-- Modal -->
+<div class="pm-overlay" id="pm-overlay" aria-hidden="true">
+  <div class="pm-dialog" role="dialog" aria-modal="true" aria-labelledby="pm-title">
+
+    <div class="pm-top">
+      <button class="pm-btn pm-close" type="button" id="pm-close" aria-label="Close project details">Close ✕</button>
+    </div>
+
+    <div class="pm-frame" id="pm-frame"></div>
+    <div class="pm-band">
+      <div class="pm-thumbs" id="pm-thumbs" aria-label="Project screenshots"></div>
+      <div class="pm-caption"><span id="pm-fig"></span><span id="pm-alt"></span></div>
+    </div>
+
+    <header class="pm-head">
+      <div class="pm-meta-row">
+        <span class="pm-chip-dark" id="pm-chip"></span>
+        <span class="pm-meta" id="pm-meta"></span>
+      </div>
+      <h2 class="pm-title" id="pm-title"></h2>
+      <ul class="pm-stack" id="pm-stack"></ul>
+    </header>
+
+    <section class="pm-section">
+      <h3 class="pm-label"><span class="pm-sq"></span><b>01</b> / Problem it solves</h3>
+      <p class="pm-text" id="pm-problem"></p>
+    </section>
+
+    <section class="pm-section">
+      <h3 class="pm-label"><span class="pm-sq"></span><b>02</b> / Process followed</h3>
+      <ol class="pm-steps" id="pm-process"></ol>
+    </section>
+
+    <section class="pm-section">
+      <h3 class="pm-label"><span class="pm-sq"></span><b>03</b> / Solution</h3>
+      <p class="pm-text" id="pm-solution"></p>
+    </section>
+
+    <section class="pm-section">
+      <h3 class="pm-label"><span class="pm-sq"></span><b>04</b> / Result</h3>
+      <div>
+        <p class="pm-text" id="pm-result"></p>
+        <div class="pm-metrics" id="pm-metrics"></div>
+      </div>
+    </section>
+
+    <footer class="pm-foot">
+      <span class="pm-foot-hint">Esc to close</span>
+      <a class="pm-btn pm-btn--light" id="pm-link" href="#" target="_blank" rel="noopener noreferrer">
+        <span id="pm-link-label">Visit project</span>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"></path><path d="M7 17 17 7"></path></svg>
+      </a>
+    </footer>
+  </div>
+</div>
+<script>
+  const PROJECTS = [
+    {
+      id: "project-1",
+      title: "DEVBOOST",
+      category: "Web App",
+      meta: "2026 · Education Platform",
+      stack: ["JavaScript", "HTML", "CSS"],
+      problem: "Many young people in El Salvador have programming skills but struggle to find job opportunities because they lack professional experience and a portfolio to demonstrate their abilities. As a result, it becomes difficult for them to prove what they can do and stand out in the job market.",
+      process: [
+        { text: "Research & requirements", tag: "Discovery" },
+        { text: "Design & architecture", tag: "Planning" },
+        { text: "Development & iteration", tag: "Build" },
+        { text: "Testing & launch", tag: "Delivery" }
+      ],
+      solution: "To solve this problem, we created DevBoost, a platform where programmers can improve their skills through daily challenges, develop real projects, and organize their work in a personal portfolio. It offers different learning levels (Beginner, Intermediate, and Advanced), helping users gain experience, build confidence, and showcase their abilities to future employers.",
+      result: "DevBoost has been successfully launched and is currently being used by a growing community of programmers. Users have reported improved skills, increased confidence, and better job prospects. The platform has received positive feedback for its user-friendly interface, engaging challenges, and the ability to create a professional portfolio that effectively showcases their work.",
+      metrics: [],
+      images: [
+        { src: "Devboost_Rocket_Logo.png", alt: "logo" },
+        { src: "img/project-1-2.jpg", alt: "Dashboard view" },
+        { src: "img/project-1-3.jpg", alt: "Mobile layout" }
+      ],
+      link: { url: "", label: "Visit project" }
+    },
+    {
+      id: "project-2",
+      title: "IDentify",
+      category: "Website",
+      meta: "2026 · Academic Project",
+      stack: ["Google Teachable Machine", "JS", "HTML", "CSS"],
+      problem: "In restricted-access facilities such as corporate offices, educational institutions, and security zones, traditional identity verification heavily relies on manual access logs and physical credentials. This reliance creates operational bottlenecks, causes entrance delays, and increases security risks due to potential human error. Consequently, security personnel and facility administrators lack a fast, automated system to accurately verify authorized individuals in real time.",
+      process: [
+        { text: "Research", tag: "" },
+        { text: "Training the model", tag: "" },
+        { text: "Testing", tag: "" },
+        { text: "Developing and deploying the website", tag: "" }
+      ],
+      solution: "Our website aims to solve this problem through a facial recognition system developed with Google Teachable Machine, which identifies pre-registered individuals based on their facial features. The solution is primarily designed for administrators and security personnel, streamlining identification, access logging, and personnel control within restricted spaces.",
+      result: "Challenges and mistakes were encountered during the development of the website, but they were overcome through research and testing. The final result is a functional website that allows administrators to register individuals and security personnel to verify their identities using facial recognition. This solution enhances security, reduces delays, and improves operational efficiency in restricted-access facilities.",
+      metrics: [],
+      images: [
+        { src: "id.png", alt: "logo" },
+        { src: "image.png", alt: "Landing page" }
+      ],
+      link: { url: "https://jeremy-torres2026-web.github.io/IDentify/my-model/index.html", label: "View website" }
+    }
+  ];
+
+  (function () {
+    const $ = (id) => document.getElementById(id);
+    const overlay = $("pm-overlay");
+    const dialog = overlay.querySelector(".pm-dialog");
+    let lastTrigger = null;
+
+    const pad = (n) => String(n).padStart(2, "0");
+
+    function renderImage(project, i) {
+      const img = project.images[i];
+      const frame = $("pm-frame");
+      frame.textContent = "";
+
+      const fallback = document.createElement("div");
+      fallback.className = "pm-fallback";
+      fallback.textContent = "Screenshot " + pad(i + 1);
+      frame.append(fallback);
+
+      if (img) {
+        const el = document.createElement("img");
+        el.src = img.src;
+        el.alt = img.alt;
+        el.addEventListener("error", () => el.remove());
+        frame.append(el);
+      }
+
+      $("pm-fig").textContent = "Fig. " + pad(i + 1) + " / " + pad(project.images.length || 1);
+      $("pm-alt").textContent = img ? img.alt : "";
+
+      $("pm-thumbs").querySelectorAll(".pm-thumb").forEach((t, idx) => {
+        if (idx === i) t.setAttribute("aria-current", "true");
+        else t.removeAttribute("aria-current");
+      });
+    }
+
+    function render(index) {
+      const p = PROJECTS[index];
+
+      $("pm-chip").textContent = pad(index + 1) + " / " + p.category;
+      $("pm-meta").textContent = p.meta || "";
+      $("pm-title").textContent = p.title;
+
+      const stack = $("pm-stack");
+      stack.textContent = "";
+      p.stack.forEach((s) => {
+        const li = document.createElement("li");
+        li.className = "pm-chip-light";
+        li.textContent = s;
+        stack.append(li);
+      });
+
+      $("pm-problem").textContent = p.problem;
+      $("pm-solution").textContent = p.solution;
+      $("pm-result").textContent = p.result;
+
+      const steps = $("pm-process");
+      steps.textContent = "";
+      p.process.forEach((s) => {
+        const li = document.createElement("li");
+        const span = document.createElement("span");
+        span.textContent = s.text;
+        li.append(span);
+        const small = document.createElement("small");
+        small.textContent = s.tag || "";
+        li.append(small);
+        steps.append(li);
+      });
+
+      const metrics = $("pm-metrics");
+      metrics.textContent = "";
+      metrics.style.display = p.metrics && p.metrics.length ? "flex" : "none";
+      (p.metrics || []).forEach((m) => {
+        const box = document.createElement("div");
+        box.className = "pm-metric";
+        const strong = document.createElement("strong");
+        strong.textContent = m.value;
+        const dot = document.createElement("i");
+        const small = document.createElement("small");
+        small.textContent = m.label;
+        const row = document.createElement("div");
+        row.append(strong, dot);
+        box.append(row, small);
+        metrics.append(box);
+      });
+
+      const thumbs = $("pm-thumbs");
+      thumbs.textContent = "";
+      thumbs.style.visibility = p.images.length > 1 ? "visible" : "hidden";
+      p.images.forEach((img, i) => {
+        const b = document.createElement("button");
+        b.type = "button";
+        b.className = "pm-thumb";
+        b.setAttribute("aria-label", "Show screenshot " + (i + 1) + ": " + img.alt);
+        const t = document.createElement("img");
+        t.src = img.src;
+        t.alt = "";
+        t.addEventListener("error", () => t.remove());
+        b.append(t);
+        b.addEventListener("click", () => renderImage(p, i));
+        thumbs.append(b);
+      });
+      renderImage(p, 0);
+
+      $("pm-link").href = p.link.url;
+      $("pm-link-label").textContent = p.link.label || "Visit project";
+
+      overlay.scrollTop = 0;
+    }
+
+    function open(projectId, trigger) {
+      const idx = PROJECTS.findIndex((p) => p.id === projectId);
+      if (idx === -1) return;
+      lastTrigger = trigger || null;
+      render(idx);
+      overlay.classList.add("is-open");
+      overlay.setAttribute("aria-hidden", "false");
+      document.body.classList.add("pm-locked");
+      $("pm-close").focus();
+    }
+
+    function close() {
+      overlay.classList.remove("is-open");
+      overlay.setAttribute("aria-hidden", "true");
+      document.body.classList.remove("pm-locked");
+      if (lastTrigger) lastTrigger.focus();
+    }
+
+    document.addEventListener("click", (e) => {
+      const trigger = e.target.closest("[data-project]");
+      if (trigger) {
+        e.preventDefault();
+        open(trigger.dataset.project, trigger);
+      }
+    });
+
+    $("pm-close").addEventListener("click", close);
+
+    overlay.addEventListener("mousedown", (e) => {
+      if (e.target === overlay) close();
+    });
+
+    document.addEventListener("keydown", (e) => {
+      if (!overlay.classList.contains("is-open")) return;
+
+      if (e.key === "Escape") { close(); return; }
+
+      if (e.key === "Tab") {
+        const focusable = dialog.querySelectorAll(
+          'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])'
+        );
+        const visible = Array.from(focusable).filter((el) => el.offsetParent !== null);
+        if (!visible.length) return;
+        const first = visible[0];
+        const last = visible[visible.length - 1];
+        if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+        else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+      }
+    });
+  })();
+</script>
+
+<!-- END: MainFooter -->
+<!-- Icon Replacement Script -->
+<script data-purpose="lucide-icons">
+    document.addEventListener("DOMContentLoaded", () => {
+      if (window.lucide) {
+        window.lucide.createIcons();
+      }
+    });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script>
+  const EMAILJS_PUBLIC_KEY = "RPZVyg8s1ilrs6Ly4";
+  const EMAILJS_SERVICE_ID = "service_709d8wv";
+  const EMAILJS_TEMPLATE_ID = "template_k3oobt3";
+
+  // Límites de envío
+  const COOLDOWN_MS = 60 * 1000;        // 60 s entre envíos
+  const MAX_PER_HOUR = 3;               // máximo 3 envíos por hora
+  const HOUR_MS = 60 * 60 * 1000;
+  const STORAGE_KEY = "contactSendLog";
+
+  emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
+
+  const form = document.getElementById("contact-form");
+  const statusEl = document.getElementById("contact-status");
+  const submitBtn = document.getElementById("contact-submit");
+  const submitLabel = document.getElementById("contact-submit-label");
+
+  // --- Registro de envíos en localStorage (con try/catch por si está bloqueado) ---
+  function getSendLog() {
+    try {
+      const log = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+      const now = Date.now();
+      return log.filter(t => now - t < HOUR_MS);
+    } catch {
+      return [];
+    }
+  }
+
+  function saveSendLog(log) {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(log));
+    } catch { /* ignorar */ }
+  }
+
+  // Devuelve un mensaje de error si está limitado, o null si puede enviar
+  function checkRateLimit() {
+    const log = getSendLog();
+    const now = Date.now();
+    const last = log[log.length - 1];
+
+    if (last && now - last < COOLDOWN_MS) {
+      const secs = Math.ceil((COOLDOWN_MS - (now - last)) / 1000);
+      return `Please wait ${secs}s before sending another message.`;
+    }
+    if (log.length >= MAX_PER_HOUR) {
+      const mins = Math.ceil((HOUR_MS - (now - log[0])) / 60000);
+      return `Message limit reached. Try again in about ${mins} min.`;
+    }
+    return null;
+  }
+
+  function setStatus(text, type) {
+    statusEl.textContent = text;
+    statusEl.classList.remove("text-red-400", "text-green-400");
+    if (type === "ok") statusEl.classList.add("text-green-400");
+    if (type === "error") statusEl.classList.add("text-red-400");
+  }
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    setStatus("", null);
+
+    // 1) Honeypot: si está lleno es un bot. Fingimos éxito sin enviar nada.
+    if (document.getElementById("contact-website").value) {
+      setStatus("Thank you! Your message has been sent.", "ok");
+      form.reset();
+      return;
+    }
+
+    // 2) Límite de envíos
+    const limitMsg = checkRateLimit();
+    if (limitMsg) {
+      setStatus(limitMsg, "error");
+      return;
+    }
+
+    submitBtn.disabled = true;
+    submitLabel.textContent = "SENDING...";
+
+    const params = {
+      name: document.getElementById("contact-name").value.trim(),
+      email: document.getElementById("contact-email").value.trim(),
+      message: document.getElementById("contact-message").value.trim(),
+    };
+
+    try {
+      await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, params);
+
+      // Registrar el envío exitoso
+      const log = getSendLog();
+      log.push(Date.now());
+      saveSendLog(log);
+
+      setStatus("Thank you! Your message has been sent.", "ok");
+      form.reset();
+    } catch (error) {
+      console.error("EmailJS error:", error);
+      setStatus("Something went wrong. Please try again.", "error");
+    } finally {
+      submitBtn.disabled = false;
+      submitLabel.textContent = "SEND MESSAGE";
+    }
+  });
+</script>
+
+
+</body></html>
